@@ -40,6 +40,14 @@ class TestSuiteElement(FunctionElement):
             print 'testsuite>', name
 
 
+@register('if')
+class IfElement(FunctionElement):
+    def run(self):
+        condition = self.attrib.get('condition')
+        if bool(condition):
+            super(IfElement, self).run()
+
+
 def _element_factory(tag, attrs):
     cls = __function_table__.get(tag.lower(), FunctionElement)
     return cls(tag, attrs)

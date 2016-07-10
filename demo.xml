@@ -8,7 +8,7 @@
         </Body>
         <breakpoint></breakpoint>
         <expect></expect>
-        <if condition="${asda}">
+        <if condition="">
             <log><![CDATA[<<<log>>>>]]></log>
             <log>Fucking</log>
             <log>Father<log>Children</log>

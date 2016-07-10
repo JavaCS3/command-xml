@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <TestSuite name="Baby">
 
-    <TestCase>
+    <TestCase name="Lalalalal">
         <Before shit=""></Before>
         <Body>
-            <shit/>
+            <string>TEST_STRING</string>
+            <expect>TEST_STRING</expect>
+            <breakpoint></breakpoint>
+            <expect>hj</expect>
+            <if condition="">
+                <log><![CDATA[<<<log>>>>]]></log>
+                <log>Fucking</log>
+                <log>Father<log>Children</log>
+                </log>
+            </if>
         </Body>
-        <breakpoint></breakpoint>
-        <expect></expect>
-        <if condition="">
-            <log><![CDATA[<<<log>>>>]]></log>
-            <log>Fucking</log>
-            <log>Father<log>Children</log>
-            </log>
-        </if>
-        <After></After>
+        <After>
+            <!--asdsad-->
+        </After>
     </TestCase>
-    <TestCase></TestCase>
 
+    <TestCase>
+        <log>TestCase2</log>
+        <string>OKOK</string>
+        <expect>OKOK</expect>
+    </TestCase>
 </TestSuite>

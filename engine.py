@@ -3,9 +3,9 @@ from xml.etree.ElementTree import TreeBuilder, Element
 from xml.etree.cElementTree import XMLParser
 
 
-class FunctionElement(Element):
+class FunctionTag(Element):
     def __init__(self, tag, attrib, **extra):
-        super(FunctionElement, self).__init__(tag, attrib, **extra)
+        super(FunctionTag, self).__init__(tag, attrib, **extra)
         self.output_stack = [None]
         self.initialize()
 
@@ -13,7 +13,7 @@ class FunctionElement(Element):
         pass
 
     def append(self, element):
-        super(FunctionElement, self).append(element)
+        super(FunctionTag, self).append(element)
         element.output_stack = self.output_stack
 
     def last_output(self):
@@ -45,7 +45,7 @@ def register(name):
 
 
 def _element_factory(tag, attrs):
-    cls = __function_table__.get(tag.lower(), FunctionElement)
+    cls = __function_table__.get(tag.lower(), FunctionTag)
     return cls(tag, attrs)
 
 

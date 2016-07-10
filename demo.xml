@@ -4,8 +4,7 @@
     <TestCase name="Lalalalal">
         <Before shit=""></Before>
         <Body>
-            <string>TEST_STRING</string>
-            <expect>TEST_STRING</expect>
+            <string>TEST_STRING</string><expect>TEST_STRING</expect>
             <breakpoint></breakpoint>
             <expect>hj</expect>
             <if condition="">

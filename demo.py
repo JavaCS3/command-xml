@@ -3,52 +3,50 @@ from xml.etree.cElementTree import XMLParser
 from xml.etree.ElementTree import TreeBuilder, Element
 
 
-class FunctionTable(object):
-    def function(self, name):
-        func = getattr(self, 'func_' + name.lower(), None)
-        if not callable(func):
-            return None
-        return func
-
-    def func_testsuite(self, _, **kwargs):
-        name = kwargs.get('name')
-        if name:
-            print name
-
-    def func_sum(self, _,**kwargs):
-        total = 0
-        for k in kwargs:
-            v = kwargs.get(k)
-            if v:
-                total += int(v)
-        print 'sum=', total
-
-    def func_log(self, data,**kwargs):
-        print 'log:', data
-
-
 class FunctionElement(Element):
-    __function_table__ = FunctionTable()
-
-    def __init__(self, tag, attrib={}, **extra):
-        super(FunctionElement, self).__init__(tag, attrib, **extra)
+    def do(self):
+        pass
 
     def run(self):
-        func = self.__function_table__.function(self.tag)
-        if func:
-            func(self.text, **self.attrib)
+        self.do()
+        for child in self:
+            child.run()
 
     def __repr__(self):
         return '<%s %s at 0x%x>' % (type(self).__name__, repr(self.tag), id(self))
 
 
-_parser = XMLParser(target=TreeBuilder(FunctionElement))
+__function_table__ = {}
+
+
+def register(name):
+    def _wrapper(func):
+        __function_table__[name] = func
+        return func
+    return _wrapper
+
+
+@register('log')
+class LogElement(FunctionElement):
+    def do(self):
+        print 'log>', self.text
+
+
+@register('testsuite')
+class TestSuiteElement(FunctionElement):
+    def do(self):
+        name = self.attrib.get('name')
+        if name:
+            print 'testsuite>', name
+
+
+def _element_factory(tag, attrs):
+    cls = __function_table__.get(tag.lower(), FunctionElement)
+    return cls(tag, attrs)
+
+
+_parser = XMLParser(target=TreeBuilder(_element_factory))
 tree = ET.parse('demo.xml', parser=_parser)
 root = tree.getroot()
 
-def run(node):
-    node.run()
-    for child in node:
-        run(child)
-
-run(root)
+root.run()

@@ -1,6 +1,6 @@
 import xml.etree.cElementTree as ET
-from xml.etree.ElementTree import TreeBuilder, Element
 from xml.etree.cElementTree import XMLParser
+from xml.etree.ElementTree import TreeBuilder, Element
 
 
 class FunctionTag(Element):

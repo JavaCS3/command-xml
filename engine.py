@@ -42,7 +42,7 @@ __function_table__ = {}
 
 def register(name):
     def _wrapper(func):
-        __function_table__[name] = func
+        __function_table__[name.lower()] = func
         return func
 
     return _wrapper

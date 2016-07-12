@@ -7,7 +7,7 @@ class LogTag(FunctionTag):
         print 'log>', self.text
 
 
-@register('testsuite')
+@register('TestSuite')
 class TestSuiteTag(FunctionTag):
     def do(self):
         name = self.attrib.get('name')
@@ -15,7 +15,7 @@ class TestSuiteTag(FunctionTag):
             print 'test suite>', name
 
 
-@register('testcase')
+@register('TestCase')
 class TestCaseTag(FunctionTag):
     def initialize(self):
         self.inherit_env = False
@@ -58,7 +58,7 @@ class IfTag(FunctionTag):
 @register('eval')
 class EvalTag(FunctionTag):
     def do(self):
-        print eval(self.text, self.env)
+        return eval(self.text, self.env)
 
 
 @register('script')

@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<TestSuite name="Baby">
+<TestSuite name="Demo Test Suite">
 
-    <TestCase name="Lalalalal">
-        <Before shit=""></Before>
+    <TestCase name="Case 1">
+        <Before></Before>
         <Body>
-            <string>TEST_STRING</string><expect>TEST_STRING</expect>
+            <echo>TEST_STRING</echo>
+            <expect>TEST_STRING</expect>
             <breakpoint></breakpoint>
-            <expect>hj</expect>
-            <if condition="">
+            <if condition="True">
                 <log><![CDATA[<<<log>>>>]]></log>
-                <log>Fucking</log>
-                <log>Father<log>Children</log>
-                </log>
+                <log>True</log>
             </if>
+            <script><![CDATA[a = 1]]></script>
+            <script><![CDATA[print a]]></script>
         </Body>
-        <After>
-            <!--asdsad-->
-        </After>
+        <After></After>
     </TestCase>
 
-    <TestCase>
-        <log>TestCase2</log>
-        <string>OKOK</string>
+    <TestCase name="Case 2">
+        <script><![CDATA[print a]]></script>
+        <echo>OKOK</echo>
         <expect>OKOK</expect>
     </TestCase>
 </TestSuite>

@@ -6,7 +6,9 @@ from xml.etree.ElementTree import TreeBuilder, Element
 class FunctionTag(Element):
     def __init__(self, tag, attrib, **extra):
         super(FunctionTag, self).__init__(tag, attrib, **extra)
+        self.inherit_env = True
         self.output_stack = [None]
+        self.env = {}
         self.initialize()
 
     def initialize(self):
@@ -14,6 +16,8 @@ class FunctionTag(Element):
 
     def append(self, element):
         super(FunctionTag, self).append(element)
+        if element.inherit_env:
+            element.env = self.env
         element.output_stack = self.output_stack
 
     def last_output(self):

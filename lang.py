@@ -18,6 +18,7 @@ class TestSuiteTag(FunctionTag):
 @register('testcase')
 class TestCaseTag(FunctionTag):
     def initialize(self):
+        self.inherit_env = False
         self.name = self.attrib.get('name', 'N/A')
 
     def do(self):

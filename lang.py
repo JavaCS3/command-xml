@@ -41,7 +41,7 @@ class EchoTag(FunctionTag):
 @register('expect')
 class ExpectTag(FunctionTag):
     def do(self):
-        if self.last_output() == self.text:
+        if self.text in self.last_output():
             print 'expect>', self.text
         else:
             raise Exception('Expect Failed')
@@ -53,6 +53,7 @@ class IfTag(FunctionTag):
         condition = self.attrib.get('condition')
         if bool(condition):
             super(IfTag, self).run()
+
 
 @register('eval')
 class EvalTag(FunctionTag):

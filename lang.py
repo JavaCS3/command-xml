@@ -27,12 +27,13 @@ class TestCaseTag(FunctionTag):
     def run(self):
         try:
             super(TestCaseTag, self).run()
-        except:
-            print '!!!test case', self.name, 'failed'
+        except Exception, e:
+            print e
+            print '!!! test case>', self.name, 'failed'
 
 
-@register('string')
-class StringTag(FunctionTag):
+@register('echo')
+class EchoTag(FunctionTag):
     def do(self):
         return self.text
 
@@ -52,3 +53,14 @@ class IfTag(FunctionTag):
         condition = self.attrib.get('condition')
         if bool(condition):
             super(IfTag, self).run()
+
+@register('eval')
+class EvalTag(FunctionTag):
+    def do(self):
+        print eval(self.text, self.env)
+
+
+@register('script')
+class ScriptTag(FunctionTag):
+    def do(self):
+        exec self.text in self.env
